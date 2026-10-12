@@ -52,19 +52,18 @@ PENDING -> PROCESSING -> COMPLETED
 
 ## Project Structure
 
-```
-src/main/java/com/jq
-├── controller   REST endpoints
-├── service      business logic, retry backoff, reclaimer
-├── repository   database access (JPA and SQL queries)
-├── worker       worker threads and worker manager
-├── handler      job handlers (one per job type)
-├── scheduler    scheduled reclaimer task
-├── model        entity and data classes
-├── dto          request and response objects
-├── exception    custom exceptions and error handling
-└── config       admin token check
-```
+All the code is inside `src/main/java/com/jq`:
+
+- `controller` - REST endpoints
+- `service` - business logic, retry backoff, reclaimer
+- `repository` - database access (JPA and SQL queries)
+- `worker` - worker threads and worker manager
+- `handler` - job handlers (one per job type)
+- `scheduler` - scheduled reclaimer task
+- `model` - entity and data classes
+- `dto` - request and response objects
+- `exception` - custom exceptions and error handling
+- `config` - admin token check
 
 ## Getting Started
 
