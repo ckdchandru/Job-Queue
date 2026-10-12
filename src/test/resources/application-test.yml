@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${TEST_DB_HOST:localhost}:${TEST_DB_PORT:5432}/${TEST_DB_NAME:jq_test}
+    username: ${TEST_DB_USER:jq}
+    password: ${TEST_DB_PASSWORD:jq}
+    hikari:
+      maximum-pool-size: 30
+
+jobqueue:
+  worker:
+    enabled: false
+  reclaim:
+    enabled: false
+  admin:
+    token: test-token

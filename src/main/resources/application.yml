@@ -1,0 +1,48 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: jq
+  datasource:
+    url: jdbc:postgresql://localhost:5432/jq
+    username: jq
+    password: jq
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+
+logging:
+  level:
+    com.jq: INFO
+
+jobqueue:
+  default-max-attempts: 5
+
+  worker:
+    enabled: true
+    thread-count: 1
+    poll-interval-ms: 200
+    shutdown-grace-period-ms: 30000
+
+  retry:
+    base-delay-ms: 1000
+    max-delay-ms: 300000
+    jitter-fraction: 0.2
+
+  reclaim:
+    enabled: true
+    visibility-timeout-ms: 300000
+    scan-interval-ms: 30000
+    batch-size: 50
+
+  admin:
+    token: change-me

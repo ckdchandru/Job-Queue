@@ -1,0 +1,34 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: jq
+      POSTGRES_USER: jq
+      POSTGRES_PASSWORD: jq
+    ports:
+      - "5432:5432"
+    volumes:
+      - jq-data:/var/lib/postgresql/data
+      - ./docker/init-test-db.sql:/docker-entrypoint-initdb.d/init-test-db.sql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U jq -d jq"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/jq
+      SPRING_DATASOURCE_USERNAME: jq
+      SPRING_DATASOURCE_PASSWORD: jq
+      JOBQUEUE_ADMIN_TOKEN: change-me
+      JOBQUEUE_WORKER_THREAD_COUNT: 4
+    ports:
+      - "8080:8080"
+
+volumes:
+  jq-data:
